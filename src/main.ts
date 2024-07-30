@@ -5,9 +5,23 @@ import App from './App.vue'
 import router from './router'
 import './assets/main.css'
 
-const app = createApp(App)
+// Vuetify
+import 'vuetify/styles'
+import {createVuetify} from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
 
-app.use(createPinia())
-app.use(router)
+const vuetify = createVuetify({
+    ssr: true,
+    components,
+    directives,
+    theme: {
+        defaultTheme: 'dark'
+    }
+})
 
-app.mount('#app')
+createApp(App)
+    .use(vuetify)
+    .use(router)
+    .use(createPinia())
+    .mount('#app')
