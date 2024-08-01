@@ -1,27 +1,51 @@
 <script lang="ts" setup>
 import Tilt from 'vanilla-tilt-vue'
+import type { PropType } from "vue";
 
-defineProps({
+// Type
+import { SkateChoices } from "@/types/SkateChoices";
+
+// Store
+import { useSkateStore } from "@/stores/skateStore";
+const skateStore = useSkateStore()
+
+const props = defineProps({
   imgPath: {
     type: String,
+    required: true
+  },
+  choice: {
+    type: Number,
     required: true
   }
 })
 
+// Data
 const tiltOptions = {
   speed: 500,
   max: 10,
   transition: true,
   gyroscope: false,
 }
+
+// Functions
+function displayCarousel() {
+  skateStore.skateChoice = props.choice
+  skateStore.showGallery = true
+}
 </script>
 
 <template>
-  <Tilt :options="tiltOptions" :parallax="true" class="m-4 relative w-[20rem] h-[24.85rem] text-center flex shadow-xl flex-col justify-center bg-none items-center rounded cursor-pointer">
-    <div class="shine w-[20rem] h-[24.85rem] rounded" style="transform: translateZ(20px)"/>
-    <img alt="jaquette" class="top-0 absolute z-10 rounded" src="@/assets/overlay.png" style="transform: translateZ(20px)"/>
-    <img :src="imgPath" alt="skate-board" class="top-0 absolute rounded" style="transform: translateZ(-20px)"/>
-  </Tilt>
+    <Tilt
+      @click="displayCarousel"
+      :options="tiltOptions" :parallax="true"
+      class="m-4 relative w-[20rem] h-[24.85rem] text-center flex shadow-xl flex-col justify-center bg-none items-center rounded cursor-pointer"
+    >
+      <div class="shine w-[20rem] h-[24.85rem] rounded" style="transform: translateZ(20px)" />
+      <img alt="jaquette" class="top-0 absolute z-10 rounded" src="@/assets/overlay.png"
+           style="transform: translateZ(20px)" />
+      <img :src="imgPath" alt="skate-board" class="top-0 absolute rounded" style="transform: translateZ(-20px)" />
+    </Tilt>
 </template>
 
 <style scoped lang="scss">
@@ -32,6 +56,7 @@ const tiltOptions = {
   position: relative;
   overflow: hidden;
   transition: all 0.3s;
+
   &::before {
     background: linear-gradient(
                     to right,
@@ -49,6 +74,7 @@ const tiltOptions = {
 
   &:hover {
     box-shadow: 0 0 15px 15px rgba(0, 0, 0, .3), 0 0 0 2px white;
+
     &::before {
       animation: shine 0.5s;
     }
