@@ -18,8 +18,8 @@ const tiltOptions = {
 
 <template>
   <Tilt :options="tiltOptions" :parallax="true" class="m-4 relative w-[20rem] h-[24.85rem] text-center flex shadow-xl flex-col justify-center bg-none items-center rounded cursor-pointer">
-      <img alt="skate-board" class="shine top-0 absolute z-10" src="@/assets/overlay.png" style="transform: translateZ(20px)"/>
-      <img :src="imgPath" alt="skate-board" class="top-0 absolute" style="transform: translateZ(-20px)"/>
+      <img alt="skate-board" class="shine top-0 absolute z-10 rounded" src="@/assets/overlay.png" style="transform: translateZ(20px)"/>
+      <img :src="imgPath" alt="skate-board" class="top-0 absolute rounded" style="transform: translateZ(-20px)"/>
   </Tilt>
 </template>
 
