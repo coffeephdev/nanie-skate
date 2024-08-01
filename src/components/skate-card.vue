@@ -1,14 +1,12 @@
 <script lang="ts" setup>
 import Tilt from 'vanilla-tilt-vue'
-import type { PropType } from "vue";
-
-// Type
-import { SkateChoices } from "@/types/SkateChoices";
 
 // Store
-import { useSkateStore } from "@/stores/skateStore";
+import {useSkateStore} from "@/stores/skateStore";
+
 const skateStore = useSkateStore()
 
+// Prop
 const props = defineProps({
   imgPath: {
     type: String,
@@ -23,7 +21,7 @@ const props = defineProps({
 // Data
 const tiltOptions = {
   speed: 500,
-  max: 10,
+  max: 15,
   transition: true,
   gyroscope: false,
 }
@@ -36,16 +34,16 @@ function displayCarousel() {
 </script>
 
 <template>
-    <Tilt
+  <Tilt
       @click="displayCarousel"
       :options="tiltOptions" :parallax="true"
       class="m-4 relative w-[20rem] h-[24.85rem] text-center flex shadow-xl flex-col justify-center bg-none items-center rounded cursor-pointer"
-    >
-      <div class="shine w-[20rem] h-[24.85rem] rounded" style="transform: translateZ(20px)" />
-      <img alt="jaquette" class="top-0 absolute z-10 rounded" src="@/assets/overlay.png"
-           style="transform: translateZ(20px)" />
-      <img :src="imgPath" alt="skate-board" class="top-0 absolute rounded" style="transform: translateZ(-20px)" />
-    </Tilt>
+  >
+    <div class="shine w-[20rem] h-[24.85rem] rounded" style="transform: translateZ(20px)"/>
+    <img alt="jaquette" class="top-0 absolute z-10 rounded" src="@/assets/overlay.png"
+         style="transform: translateZ(20px)"/>
+    <img :src="imgPath" alt="skate-board" class="top-0 absolute rounded" style="transform: translateZ(-20px)"/>
+  </Tilt>
 </template>
 
 <style scoped lang="scss">
@@ -59,9 +57,9 @@ function displayCarousel() {
 
   &::before {
     background: linear-gradient(
-                    to right,
-                    fade_out(#fff, 1) 0%,
-                    fade_out(#fff, 0.7) 100%
+            to right,
+            fade_out(#fff, 1) 0%,
+            fade_out(#fff, 0.7) 100%
     );
     content: " ";
     height: 120%;

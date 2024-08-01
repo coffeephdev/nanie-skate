@@ -1,19 +1,24 @@
 <script lang="ts" setup>
 import {NImage, NImageGroup, NModal, NSpin} from "naive-ui";
+import {computed, ref} from "vue";
+
 // Image
 import SkateCard from "@/components/skate-card.vue";
 
 // Store
 import {useSkateStore} from "@/stores/skateStore";
-import {computed, ref} from "vue";
 
 const skateStore = useSkateStore()
 
+// Data
 const imagesLoader = ref<boolean[]>([])
+
+// Computed
 const isLoading = computed(() => {
   return imagesLoader.value.some(loading => loading == true)
 })
 
+// Function
 function handleStartLoading(index: number) {
   imagesLoader.value[index] = true;
 }
@@ -39,10 +44,10 @@ const handleError = (index: number) => {
              class="max-h-[80%] max-w-[80%] overflow-y-auto text-center"
              close-on-esc
              preset="card"
-             @close="skateStore.resetGallery()"
+             @close="skateStore.$reset()"
     >
       <n-spin :show="isLoading">
-        <n-image-group>
+        <n-image-group :render-toolbar="(props) => [props.nodes.prev, props.nodes.next, props.nodes.close]">
           <n-image
               v-for="(imagePath, index) in skateStore.getImagesPath"
               :alt="`${skateStore.getLabel} img${index}`"
