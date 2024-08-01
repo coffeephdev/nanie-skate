@@ -9,7 +9,7 @@ defineProps({
 })
 
 const tiltOptions = {
-  speed: 50,
+  speed: 500,
   max: 10,
   transition: true,
   gyroscope: false,
@@ -18,14 +18,17 @@ const tiltOptions = {
 
 <template>
   <Tilt :options="tiltOptions" :parallax="true" class="m-4 relative w-[20rem] h-[24.85rem] text-center flex shadow-xl flex-col justify-center bg-none items-center rounded cursor-pointer">
-      <img alt="skate-board" class="shine top-0 absolute z-10 rounded" src="@/assets/overlay.png" style="transform: translateZ(20px)"/>
-      <img :src="imgPath" alt="skate-board" class="top-0 absolute rounded" style="transform: translateZ(-20px)"/>
+    <div class="shine w-[20rem] h-[24.85rem] rounded" style="transform: translateZ(20px)"/>
+    <img alt="jaquette" class="top-0 absolute z-10 rounded" src="@/assets/overlay.png" style="transform: translateZ(20px)"/>
+    <img :src="imgPath" alt="skate-board" class="top-0 absolute rounded" style="transform: translateZ(-20px)"/>
   </Tilt>
 </template>
 
 <style scoped lang="scss">
 
 .shine {
+  z-index: 20;
+  content: " ";
   position: relative;
   overflow: hidden;
   transition: all 0.3s;
@@ -42,7 +45,6 @@ const tiltOptions = {
     position: absolute;
     top: 0;
     width: 50%;
-    z-index: 2;
   }
 
   &:hover {
